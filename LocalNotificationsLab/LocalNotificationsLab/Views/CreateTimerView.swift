@@ -10,6 +10,13 @@ import UIKit
 
 class CreateTimerView: UIView {
   
+  // TODO : add stack view of imageViews to select image to associate with timer
+  public lazy var stackView : UIStackView = {
+    let stack = UIStackView()
+    
+    return stack
+  }()
+  
   public lazy var titleField : UITextField = {
     let textField = UITextField()
     textField.backgroundColor = .orange
