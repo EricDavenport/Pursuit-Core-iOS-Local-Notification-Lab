@@ -36,6 +36,7 @@ class ManageTimersViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Timers"
+    center.delegate = self
     navigationItem.rightBarButtonItem = barButton
     timerView.tableView.dataSource = self
     timerView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "timerCell")
