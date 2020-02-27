@@ -45,6 +45,7 @@ class ManageTimersViewController: UIViewController {
     configureRefreshControl()
   }
   
+  
   private func configureRefreshControl() {
    refreshControl = UIRefreshControl()
     timerView.tableView.refreshControl = refreshControl

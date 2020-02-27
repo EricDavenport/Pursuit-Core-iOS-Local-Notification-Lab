@@ -14,6 +14,8 @@ class CreateTimerViewController: UIViewController {
   
   private var timeInterval : TimeInterval = Date().timeIntervalSinceNow + 10 // 10 sec from now
 
+  
+  
   override func loadView() {
     view = createView
     view.backgroundColor = .systemGroupedBackground
@@ -25,8 +27,32 @@ class CreateTimerViewController: UIViewController {
     
   }
   
+  private func createTimer() {
+    let content = UNMutableNotificationContent()
+    content.title = createView.titleField.text ?? "No Title"
+    content.body = "Local Notification Body"
+    content.subtitle = "Notification Subtitle"
+    content.sound = .default
+    
+    let identifier = UUID().uuidString
+    
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: timeInterval, repeats: false)
+    
+    let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+    
+    UNUserNotificationCenter.current().add(request) { (error) in
+      if let error = error {
+        print("error adding request: \(error)")
+      } else {
+        print("Request added successfully")
+      }
+    }
+    
+    
+  }
+  
   private func buttonSetup() {
-    createView.launchButton.addTarget(self, action: #selector(createTimer), for: .touchUpInside)
+    createView.launchButton.addTarget(self, action: #selector(createTimerFunc), for: .touchUpInside)
     createView.datePicker.addTarget(self, action: #selector(datePickerChanged(_:)), for: .allTouchEvents)
   }
   
@@ -36,7 +62,7 @@ class CreateTimerViewController: UIViewController {
     print(timeInterval)
   }
   
-  @objc private func createTimer() {
+  @objc private func createTimerFunc() {
     print("create")
     let content = UNMutableNotificationContent()
     content.title = createView.titleField.text ?? "No title"
@@ -59,6 +85,8 @@ class CreateTimerViewController: UIViewController {
     }
     dismiss(animated: true)
   }
+  
+  
   
   
 }

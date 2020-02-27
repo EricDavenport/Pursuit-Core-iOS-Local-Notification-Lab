@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol createTimer : AnyObject {
+  func didCreateTimer(_ createTimerViewController: CreateTimerViewController)
+}
+
 class CreateTimerView: UIView {
+  
+  lazy var delegate = createTimer.self
   
   // TODO : add stack view of imageViews to select image to associate with timer
   public lazy var stackView : UIStackView = {
